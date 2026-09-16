@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <title>NEXORA 2026 — Dashboard</title>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <div class="container" style="padding-top: 56px;">
+    <h1 id="welcome-heading">Welcome back</h1>
+    <p style="color: var(--text-secondary); margin-bottom: 40px;">Complete all three steps below to finish your participation.</p>
+    <div class="icon-card-grid">
+      <div class="card">
+        <h3>1. Registration</h3>
+              <span id="reg-status-tag" class="status-tag status-pending">Loading…</span>
+                <div style="margin-top:12px;"><a id="reg-btn" href="/register" class="btn" style="display:none;">Complete</a></div>
+      </div>
+      <div class="card">
+        <h3>2. Submission</h3>
+                <span id="sub-status-tag" class="status-tag status-pending">Loading…</span>
+                <div style="margin-top:12px;"><a id="sub-btn" href="/submission" class="btn" style="display:none;">Complete</a></div>
+      </div>
+      <div class="card">
+        <h3>3. Payment</h3>
+                <span id="pay-status-tag" class="status-tag status-pending">Loading…</span>
+                <div style="margin-top:12px;"><a id="pay-btn" href="/payment" class="btn" style="display:none;">Complete</a></div>
+      </div>
+        <div class="card" id="result-card" style="display:none;">
+        <h3>Selection Result</h3>
+        <span id="result-status-tag" class="status-tag"></span>
+        <p id="result-message" style="margin-top:8px; color: var(--text-secondary); font-size: 14px;"></p>
+      </div>
+    </div>
+  </div>
+  <%- include('partials/footer') %>
+  <script src="/js/nav.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

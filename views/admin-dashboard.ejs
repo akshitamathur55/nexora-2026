@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <title>NEXORA 2026 — Admin</title>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <div class="container" style="max-width: 900px; padding-top: 48px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <h1 style="margin-bottom:0;">Admin — Registrations</h1>
+      <a href="/admin/submissions" class="btn btn-primary">View Submissions →</a>
+    </div>
+    <div style="margin-bottom: 24px;">
+      <button class="btn" data-filter="">All</button>
+      <button class="btn" data-filter="Pending Verification">Pending Verification</button>
+      <button class="btn" data-filter="Verified">Verified</button>
+      <button class="btn" data-filter="Rejected">Rejected</button>
+    </div>
+
+    <table style="width:100%; border-collapse: collapse;" id="reg-table">
+      <thead>
+        <tr style="text-align:left; border-bottom: 1px solid var(--border);">
+          <th style="padding:8px;">Name</th>
+          <th style="padding:8px;">Email</th>
+          <th style="padding:8px;">Track</th>
+          <th style="padding:8px;">Payment Proof</th>
+          <th style="padding:8px;">Status</th>
+          <th style="padding:8px;">Action</th>
+        </tr>
+      </thead>
+      <tbody id="reg-table-body"></tbody>
+    </table>
+  </div>
+  <%- include('partials/footer') %>
+  <script src="/js/admin.js"></script>
+  <script src="/js/nav.js"></script>
+</body>
+</html>

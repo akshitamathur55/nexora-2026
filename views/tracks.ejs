@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <title>NEXORA 2026 — Tracks</title>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <div class="container" style="max-width: 960px; padding-top: 48px;">
+    <h1>Research <span class="heading-accent">Tracks</span></h1>
+    <p style="color: var(--text-secondary); margin-bottom: 32px;">Choose the track that best fits your research when you submit your abstract.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+      <div class="card">
+        <h3>AI/ML</h3>
+        <p>Artificial intelligence, machine learning, deep learning, generative AI, NLP, computer vision, and responsible AI.</p>
+      </div>
+      <div class="card">
+        <h3>Data Science</h3>
+        <p>Data analysis, visualization, big data, predictive analytics, data privacy and governance.</p>
+      </div>
+      <div class="card">
+        <h3>Emerging Tech</h3>
+        <p>IoT, cloud and edge computing, blockchain, cybersecurity, AR/VR, robotics and automation.</p>
+      </div>
+      <div class="card">
+        <h3>Sustainable Tech</h3>
+        <p>Green computing, renewable energy, smart cities, sustainable agriculture, waste management, climate technology.</p>
+      </div>
+      <div class="card">
+        <h3>Interdisciplinary Innovation</h3>
+        <p>Technology in education, healthcare, agriculture, business, social innovation, HCI, rural development.</p>
+      </div>
+    </div>
+  </div>
+  <%- include('partials/footer') %>
+  <script src="/js/nav.js"></script>
+</body>
+</html>

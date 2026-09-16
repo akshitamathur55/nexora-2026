@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <title>NEXORA 2026 — Register</title>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <div class="container" style="max-width: 560px; padding-top: 48px;">
+    <h1>Registration</h1>
+    <div class="card">
+      <h3><span style="color: var(--accent); font-weight: bold;">1</span> Fill Details</h3>
+      <form id="registration-form">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" required style="margin-bottom:16px;">
+        <label for="email">Email *</label>
+        <input type="email" id="email" required style="margin-bottom:16px;">
+        <label for="college">College *</label>
+        <input type="text" id="college" required style="margin-bottom:16px;">
+        <label for="phone">Phone *</label>
+        <input type="tel" id="phone" required style="margin-bottom:16px;">
+        <label for="track">Track Interest *</label>
+        <select id="track" required style="margin-bottom:16px;">
+          <option value="">Select a track</option>
+          <option>AI/ML</option><option>Data Science</option><option>Emerging Tech</option>
+          <option>Sustainable Tech</option><option>Interdisciplinary Innovation</option>
+        </select>
+        <div id="reg-error" style="color: var(--status-error); margin-bottom: 16px;"></div>
+        <button type="submit" id="reg-submit-btn" class="btn btn-primary" style="width:100%;">Continue to Submission →</button>
+      </form>
+    </div>
+  </div>
+  <%- include('partials/footer') %>
+  <script src="/js/nav.js"></script>
+  <script src="/js/register.js"></script>
+</body>
+</html>

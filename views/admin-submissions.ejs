@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <title>NEXORA 2026 — Admin: Submissions</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+  <div class="container" style="max-width: 1000px; padding-top: 48px;">
+    <h1>Admin — Submissions</h1>
+    <p><a href="/admin">← Back to Registrations</a></p>
+
+    <div style="margin-bottom: 24px;">
+      <button class="btn" data-track="">All Tracks</button>
+      <button class="btn" data-track="AI/ML">AI/ML</button>
+      <button class="btn" data-track="Data Science">Data Science</button>
+      <button class="btn" data-track="Emerging Tech">Emerging Tech</button>
+      <button class="btn" data-track="Sustainable Tech">Sustainable Tech</button>
+      <button class="btn" data-track="Interdisciplinary Innovation">Interdisciplinary</button>
+    </div>
+
+    <table style="width:100%; border-collapse: collapse;">
+      <thead>
+          <tr style="text-align:left; border-bottom: 1px solid var(--border);">
+          <th style="padding:8px;">Title</th>
+          <th style="padding:8px;">Authors</th>
+          <th style="padding:8px;">Track</th>
+          <th style="padding:8px;">Abstract</th>
+          <th style="padding:8px;">Poster</th>
+          <th style="padding:8px;">Status</th>
+          <th style="padding:8px;">Action</th>
+        </tr>thead>
+      <tbody id="sub-table-body"></tbody>
+    </table>
+  </div>
+  <%- include('partials/footer') %>
+  <script src="/js/admin-submissions.js"></script>
+  <script src="/js/nav.js"></script>
+</body>
+</html>
