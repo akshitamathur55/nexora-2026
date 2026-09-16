@@ -36,8 +36,16 @@ document.getElementById('submission-form').addEventListener('submit', async (e) 
     const data = await res.json();
     if (!data.success) throw new Error(data.message);
     window.location.href = '/payment';
-  } catch (err) {
-    errorBox.textContent = err.message;
+      } catch (err) {
+    if (err.message === 'Failed to fetch') {
+      errorBox.textContent = 'Connection issue — please wait a few seconds and tap submit again.';
+    } else {
+      errorBox.textContent = err.message;
+    }
     btn.disabled = false;
   }
+  // } catch (err) {
+  //   errorBox.textContent = err.message;
+  //   btn.disabled = false;
+  // }
 });
