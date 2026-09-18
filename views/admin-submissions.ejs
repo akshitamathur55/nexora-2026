@@ -5,8 +5,9 @@
   <title>NEXORA 2026 — Admin: Submissions</title>
 </head>
 <body>
-    <%- include('partials/nav') %>
-  <div class="container" style="max-width: 1000px; padding-top: 48px;">
+  <div class="admin-guard-overlay" id="admin-guard-overlay">Checking access…</div>
+  <%- include('partials/nav') %>
+    <div class="container" style="max-width: 1000px; padding-top: 48px;">
     <h1>Admin — Submissions</h1>
     <p><a href="/admin">← Back to Registrations</a></p>
 
@@ -29,7 +30,7 @@
           <th style="padding:8px;">Poster</th>
           <th style="padding:8px;">Status</th>
           <th style="padding:8px;">Action</th>
-        </tr>thead>
+        </tr>
       <tbody id="sub-table-body"></tbody>
     </table>
   </div>

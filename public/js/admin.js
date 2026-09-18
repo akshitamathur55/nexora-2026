@@ -67,7 +67,19 @@ document.querySelectorAll('button[data-filter]').forEach(btn => {
   });
 });
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged(async user => {
   if (!user) { window.location.href = '/login'; return; }
+
+  const tokenResult = await user.getIdTokenResult();
+  if (tokenResult.claims.role !== 'admin') {
+    window.location.href = '/login';
+    return;
+  }
+
+  document.getElementById('admin-guard-overlay').style.display = 'none';
   loadRegistrations();
 });
+// auth.onAuthStateChanged(user => {
+//   if (!user) { window.location.href = '/login'; return; }
+//   loadRegistrations();
+// });
