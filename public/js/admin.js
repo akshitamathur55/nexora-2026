@@ -23,19 +23,35 @@ async function loadRegistrations() {
 
   data.registrations.forEach(reg => {
     const row = document.createElement('tr');
-    row.style.borderBottom = '1px solid var(--border)';
     row.innerHTML = `
-      <td style="padding:8px;">${reg.name}</td>
-      <td style="padding:8px;">${reg.email}</td>
-      <td style="padding:8px;">${reg.track}</td>
-            <td style="padding:8px;">${reg.paymentProofUrl ? `<a href="${reg.paymentProofUrl}" target="_blank">View</a>` : '—'}</td>
-      <td style="padding:8px;"><span class="status-tag status-${reg.paymentStatus === 'Verified' ? 'success' : reg.paymentStatus === 'Rejected' ? 'error' : 'pending'}">${reg.paymentStatus}</span></td>
-      <td style="padding:8px;">
-        ${reg.paymentStatus === 'Pending Verification' ? `
-          <button class="btn btn-primary" data-id="${reg.uid}" data-status="Verified">Verify</button>
-          <button class="btn" data-id="${reg.uid}" data-status="Rejected">Reject</button>
-        ` : ''}
-        <a href="/admin/submissions" class="btn" style="padding:6px 14px; font-size:13px;">View Submission</a>
+      <td>${reg.name}</td>
+      <td>${reg.email}</td>
+      <td>${reg.track}</td>
+      <td>
+        ${reg.paymentProofUrl
+          ? `<a href="${reg.paymentProofUrl}" target="_blank" class="admin-table-link">View</a>`
+          : '—'}
+      </td>
+      <td>
+        <span class="status-tag admin-status-tag status-${
+          reg.paymentStatus === 'Verified' ? 'success' : reg.paymentStatus === 'Rejected' ? 'error' : 'pending'
+        }">${reg.paymentStatus}</span>
+      </td>
+           <td>
+        <div class="admin-action-cell">
+          ${reg.paymentStatus === 'Pending Verification' ? `
+            <div class="admin-review-actions">
+              <button class="btn btn-primary admin-action-btn" data-id="${reg.uid}" data-status="Verified">Verify</button>
+              <button class="btn admin-action-btn admin-reject-btn" data-id="${reg.uid}" data-status="Rejected">Reject</button>
+            </div>
+          ` : reg.paymentStatus === 'Verified'
+            ? '<span class="action-done-icon action-done-success" title="Verified">✓</span>'
+            : '<span class="action-done-icon action-done-error" title="Rejected">✕</span>'
+          }
+        </div>
+      </td>
+      <td>
+        <a href="/admin/participant/${reg.uid}" class="admin-view-submission-btn">View Submission →</a>
       </td>
     `;
     tbody.appendChild(row);
@@ -79,7 +95,3 @@ auth.onAuthStateChanged(async user => {
   document.getElementById('admin-guard-overlay').style.display = 'none';
   loadRegistrations();
 });
-// auth.onAuthStateChanged(user => {
-//   if (!user) { window.location.href = '/login'; return; }
-//   loadRegistrations();
-// });

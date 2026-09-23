@@ -26,13 +26,14 @@ app.get('/payment', (req, res) => res.render('payment'));
 app.get('/admin', (req, res) => res.render('admin-dashboard'));
 app.get('/submission', (req, res) => res.render('submission'));
 app.get('/admin/submissions', (req, res) => res.render('admin-submissions'));
+app.get('/admin/participant/:uid', (req, res) => res.render('admin-participant'));
 
 // --- API routes ---
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/registration', require('./routes/registrationRoutes'));
 app.use('/api/submission', require('./routes/submissionRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
-app.use('/api/submission', require('./routes/submissionRoutes'));
+// app.use('/api/submission', require('./routes/submissionRoutes'));
 
 // health check — useful to confirm Render deploy is actually serving traffic
 app.get('/health', (req, res) => res.json({ ok: true }));

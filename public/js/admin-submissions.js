@@ -25,9 +25,26 @@ async function loadSubmissions() {
     const row = document.createElement('tr');
     row.style.borderBottom = '1px solid var(--border)';
         const abstractCell = `<a href="${sub.abstractFileUrl}" target="_blank">View PDF</a>`;
+        const authors = Array.isArray(sub.authors)
+  ? sub.authors
+  : [];
+
+const authorsHtml = authors.map((author, index) => `
+  <div class="admin-author-item">
+    <div class="admin-author-name">
+      ${index + 1}. ${author.name || 'Unknown'}
+    </div>
+
+    <div class="admin-author-meta">
+      ${[author.course, author.branch, author.year]
+        .filter(Boolean)
+        .join(' · ')}
+    </div>
+  </div>
+`).join('');
     row.innerHTML = `
       <td style="padding:8px;">${sub.title}</td>
-      <td style="padding:8px;">${sub.authors}</td>
+      <td>${authorsHtml}</td>
       <td style="padding:8px;">${sub.track}</td>
       <td style="padding:8px;">${abstractCell}</td>
       <td style="padding:8px;"><a href="${sub.posterUrl}" target="_blank">View</a></td>

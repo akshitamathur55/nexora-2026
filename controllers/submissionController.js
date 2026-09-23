@@ -14,7 +14,7 @@ exports.createSubmission = async (req, res, next) => {
       return res.status(403).json({ success: false, message: 'Abstract submissions are closed.' });
     }
 
-    // Registration must exist — payment verification is NO LONGER required before submission.
+    // Registration must exist — payment verification is NOT required before submission.
     const regDoc = await db.collection('registrations').doc(uid).get();
     if (!regDoc.exists) {
       return res.status(403).json({ success: false, message: 'Complete registration before submitting.' });
@@ -25,11 +25,11 @@ exports.createSubmission = async (req, res, next) => {
       return res.status(409).json({ success: false, message: 'You have already submitted an abstract.' });
     }
 
-        const body = req.body;
+    const body = req.body;
     const posterFile = req.files?.poster?.[0];
     const abstractFile = req.files?.abstractFile?.[0];
 
-    const requiredFields = ['title', 'authors', 'track', 'abstract', 'keywords'];
+    const requiredFields = ['title', 'track', 'abstract', 'keywords'];
     for (const field of requiredFields) {
       if (!body[field] || !body[field].trim()) {
         return res.status(400).json({ success: false, message: `${field} is required.` });
@@ -45,32 +45,51 @@ exports.createSubmission = async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Poster is required.' });
     }
 
+    let authors;
+    try { authors = JSON.parse(body.authors || '[]'); }
+    catch { return res.status(400).json({ success: false, message: 'Invalid authors data.' }); }
+
+    if (!Array.isArray(authors) || authors.length < 1 || authors.length > 4) {
+      return res.status(400).json({ success: false, message: 'Between 1 and 4 authors are required.' });
+    }
+    for (const a of authors) {
+      if (!a.name?.trim() || !a.course?.trim() || !a.branch?.trim() || !a.year?.trim()) {
+        return res.status(400).json({ success: false, message: 'Each author needs Name, Course, Branch, and Year.' });
+      }
+    }
+
+    // .pdf appended to public_id so downloads keep the correct file extension.
     const posterIsImage = posterFile.mimetype.startsWith('image/');
     const posterUpload = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
-        { folder: 'posters', public_id: uid, overwrite: true, resource_type: posterIsImage ? 'image' : 'raw' },
+        { folder: 'posters', public_id: posterIsImage ? uid : `${uid}.pdf`, overwrite: true, resource_type: posterIsImage ? 'image' : 'raw' },
         (error, result) => (error ? reject(error) : resolve(result))
       );
       stream.end(posterFile.buffer);
     });
 
-        const abstractUpload = await new Promise((resolve, reject) => {
+    const abstractUpload = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
-        { folder: 'abstracts', public_id: uid, overwrite: true, resource_type: 'raw' },
+        { folder: 'abstracts', public_id: `${uid}.pdf`, overwrite: true, resource_type: 'raw' },
         (error, result) => (error ? reject(error) : resolve(result))
       );
       stream.end(abstractFile.buffer);
     });
 
     await db.collection('submissions').doc(uid).set({
-      userId: uid, registrationId: uid,
-      title: body.title.trim(), authors: body.authors.trim(), track: body.track,
+      userId: uid,
+      registrationId: uid,
+      title: body.title.trim(),
+      authors: authors.map(a => ({ name: a.name.trim(), course: a.course.trim(), branch: a.branch.trim(), year: a.year.trim() })),
+      track: body.track,
       abstract: body.abstract.trim(),
       keywords: body.keywords.trim(),
       posterUrl: posterUpload.secure_url,
       abstractFileUrl: abstractUpload.secure_url,
-      status: 'Under Review', round2Eligible: false,
-      createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+      status: 'Under Review',
+      round2Eligible: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     });
 
     res.status(201).json({ success: true, message: 'Submission received.' });

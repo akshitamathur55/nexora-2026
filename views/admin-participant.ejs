@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <title>NEXORA 2026 — Admin: Participant</title>
+</head>
+<body>
+  <div class="admin-guard-overlay" id="admin-guard-overlay">Checking access…</div>
+  <%- include('partials/nav') %>
+  <div class="container" style="max-width: 760px; padding-top: 48px;">
+    <p><a href="/admin">← Back to Registrations</a></p>
+    <h1 id="participant-name">Loading…</h1>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3>Registration</h3>
+      <p id="reg-details" style="color:var(--text-secondary); font-size:14px;"></p>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3>Payment</h3>
+      <p><a id="payment-proof-link" href="#" target="_blank">View Payment Proof</a></p>
+      <span id="payment-status-tag" class="status-tag"></span>
+      <div id="payment-actions" style="margin-top:12px;">
+        <button class="btn btn-primary" id="verify-payment-btn">Verify</button>
+        <button class="btn" id="reject-payment-btn">Reject</button>
+      </div>
+    </div>
+
+        <div class="card" id="submission-card" style="display:none;">
+      <h3>Submission</h3>
+
+      <div class="detail-row"><span class="detail-label">Title</span><span id="sub-title" class="detail-value"></span></div>
+      <div class="detail-row"><span class="detail-label">Track</span><span id="sub-track" class="detail-value"></span></div>
+
+      <div id="sub-authors"></div>
+
+      <div class="detail-row detail-row-block">
+        <span class="detail-label">Abstract</span>
+        <p id="sub-abstract" class="detail-value-block"></p>
+      </div>
+
+      <div class="detail-row"><span class="detail-label">Keywords</span><span id="sub-keywords" class="detail-value"></span></div>
+
+      <p style="margin-top:16px;"><a id="abstract-link" href="#" target="_blank">View Abstract PDF</a> · <a id="poster-link" href="#" target="_blank">View Poster</a></p>
+
+      <div style="margin-top:12px;">
+        <span id="sub-status-tag" class="status-tag"></span>
+      </div>
+      <div id="sub-actions" style="margin-top:12px;">
+        <button class="btn btn-primary" id="accept-sub-btn">Accept</button>
+        <button class="btn" id="reject-sub-btn">Reject</button>
+      </div>
+    </div>
+
+    <div class="card" id="no-submission-card" style="display:none;">
+      <h3>Submission</h3>
+      <p style="color:var(--text-secondary);">This participant has not submitted an abstract yet.</p>
+    </div>
+  </div>
+  <%- include('partials/footer') %>
+  <script src="/js/nav.js"></script>
+  <script src="/js/admin-participant.js"></script>
+</body>
+</html>

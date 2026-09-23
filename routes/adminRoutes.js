@@ -16,4 +16,6 @@ router.get('/submissions', submissionController.listSubmissions);
 // PATCH /api/admin/submissions/:id/review — Accept/Reject (FR-5.3, FR-5.4)
 router.patch('/submissions/:id/review', submissionController.reviewSubmission);
 
+router.get('/participant/:uid', adminController.getParticipantDetail);
+
 module.exports = router;

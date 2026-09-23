@@ -43,3 +43,17 @@ exports.verifyRegistration = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getParticipantDetail = async (req, res, next) => {
+  try {
+    const { uid } = req.params;
+    const regDoc = await db.collection('registrations').doc(uid).get();
+    if (!regDoc.exists) return res.status(404).json({ success: false, message: 'Registration not found.' });
+    const subDoc = await db.collection('submissions').doc(uid).get();
+    res.json({
+      success: true,
+      registration: { uid, ...regDoc.data() },
+      submission: subDoc.exists ? { id: uid, ...subDoc.data() } : null,
+    });
+  } catch (err) { next(err); }
+};
