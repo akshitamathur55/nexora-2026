@@ -68,8 +68,8 @@ exports.uploadPaymentProof = async (req, res, next) => {
     if (!req.file) {
       return res.status(400).json({ success: false, message: 'No file uploaded.' });
     }
-    if (!['image/jpeg', 'image/png'].includes(req.file.mimetype)) {
-      return res.status(400).json({ success: false, message: 'Only JPEG or PNG files are allowed.' });
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(req.file.mimetype)) {
+      return res.status(400).json({ success: false, message: 'Only JPG, PNG, or WEBP images are allowed.' });
     }
 
     const regRef = db.collection('registrations').doc(uid);

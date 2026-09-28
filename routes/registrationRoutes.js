@@ -5,10 +5,11 @@ const multer = require('multer');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
 const registrationController = require('../controllers/registrationController');
+const handleUpload = require('../middleware/uploadHandler');
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB, per SRS section 5
+  limits: { fileSize: 10 * 1024 * 1024 }, 
 });
 
 // POST /api/registration — create registration (FR-2.1, FR-2.2)
@@ -21,7 +22,8 @@ router.get('/me', requireAuth, registrationController.getMyRegistration);
 router.post(
   '/payment-proof',
   requireAuth,
-  upload.single('proof'),
+  // upload.single('proof'),
+  handleUpload(upload.single('proof')),
   registrationController.uploadPaymentProof
 );
 

@@ -94,8 +94,31 @@ document.getElementById('submission-form').addEventListener('submit', async (e) 
   ['title', 'track', 'abstract', 'keywords']
     .forEach(field => formData.append(field, document.getElementById(field).value.trim()));
   formData.append('authors', JSON.stringify(authors));
-  formData.append('poster', posterFile);
-  formData.append('abstractFile', abstractFile);
+
+  // Compress large files in the browser. If compression is unavailable or fails,
+  // the original files are used unchanged.
+  const originalBtnText = btn.textContent;
+  const showProgress = (i, n) => { btn.textContent = `Compressing PDF… (page ${i} of ${n})`; };
+
+  let finalPoster = posterFile;
+  let finalAbstract = abstractFile;
+  try {
+    finalPoster = posterFile.type === 'application/pdf'
+      ? await compressPdfIfNeeded(posterFile, { onProgress: showProgress })
+      : await compressImageIfNeeded(posterFile, { skipBelowBytes: 9.5 * 1024 * 1024, maxDimension: 4000, quality: 0.92 });
+    finalAbstract = await compressPdfIfNeeded(abstractFile, { onProgress: showProgress });
+  } catch (e) {
+    // compression unavailable: continue with the original files
+  }
+  btn.textContent = originalBtnText;
+
+  if (finalPoster.size > 10 * 1024 * 1024 || finalAbstract.size > 10 * 1024 * 1024) {
+    errorBox.textContent = 'A file is still larger than 10 MB after compression. Please upload a smaller file.';
+    btn.disabled = false;
+    return;
+  }
+  formData.append('poster', finalPoster);
+  formData.append('abstractFile', finalAbstract);
 
   try {
     const res = await authedFetch('/api/submission', { method: 'POST', body: formData });

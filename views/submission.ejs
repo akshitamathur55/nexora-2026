@@ -37,14 +37,15 @@
       <input type="file" id="abstractFile" accept="application/pdf" style="margin-bottom:16px;">
 
       <label for="poster">Poster (PDF, PNG, or JPG/JPEG, max 10MB) *</label>
-      <input type="file" id="poster" accept="application/pdf,image/png,image/jpeg" style="margin-bottom:16px;">
-
+      <!-- <input type="file" id="poster" accept="application/pdf,image/png,image/jpeg" style="margin-bottom:16px;"> -->
+       <input type="file" id="poster" accept="application/pdf,image/png,image/jpeg,image/webp" style="margin-bottom:16px;">
       <div id="submission-error" style="color: var(--status-error); margin-bottom: 16px;"></div>
       <button type="submit" id="submission-submit-btn" class="btn btn-primary" style="width:100%;">Continue to Payment →</button>
     </form>
   </div>
   <%- include('partials/footer') %>
   <script src="/js/nav.js"></script>
+  <script src="/js/compress-image.js"></script>
   <script src="/js/submission.js"></script>
 </body>
 </html>

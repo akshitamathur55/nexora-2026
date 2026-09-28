@@ -32,8 +32,12 @@ document.getElementById('upload-btn')?.addEventListener('click', async () => {
   errorBox.textContent = '';
   if (!fileInput.files[0]) { errorBox.textContent = 'Please select a file first.'; return; }
 
+  // const formData = new FormData();
+  // formData.append('proof', fileInput.files[0]);
+
+  const proofFile = await compressImageIfNeeded(fileInput.files[0]);
   const formData = new FormData();
-  formData.append('proof', fileInput.files[0]);
+  formData.append('proof', proofFile);
 
   try {
     const res = await authedFetch('/api/registration/payment-proof', { method: 'POST', body: formData });

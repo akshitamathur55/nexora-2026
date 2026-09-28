@@ -12,7 +12,8 @@
       <h3>Scan & Pay ₹100</h3>
       <img src="/images/payment-qr.png" alt="UPI payment QR code" style="max-width:240px; display:block; margin-bottom:16px;">
       <label for="proof-file">Upload Payment Screenshot *</label>
-      <input type="file" id="proof-file" accept="image/jpeg,image/png" style="margin-bottom:16px;">
+      <input type="file" id="proof-file" accept="image/jpeg,image/png,image/webp" style="margin-bottom:16px;">
+      <!-- <input type="file" id="proof-file" accept="image/jpeg,image/png" style="margin-bottom:16px;"> -->
       <div id="upload-error" style="color: var(--status-error); margin-bottom:16px;"></div>
       <button id="upload-btn" class="btn btn-primary">Upload & Finish</button>
     </div>
@@ -24,6 +25,7 @@
   </div>
   <%- include('partials/footer') %>
   <script src="/js/nav.js"></script>
+  <script src="/js/compress-image.js"></script>
   <script src="/js/payment.js"></script>
 </body>
 </html>
