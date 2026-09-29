@@ -1,8 +1,19 @@
 const { db } = require('../config/firebase-admin');
 const cloudinary = require('../config/cloudinary');
 
+// const VALID_TRACKS = [
+//   'AI/ML', 'Data Science', 'Emerging Tech', 'Sustainable Tech', 'Interdisciplinary Innovation',
+// ];
 const VALID_TRACKS = [
-  'AI/ML', 'Data Science', 'Emerging Tech', 'Sustainable Tech', 'Interdisciplinary Innovation',
+  'Artificial Intelligence, Generative AI, Machine Learning & Data Science',
+  'Cyber Security, Blockchain & Digital Trust',
+  'IoT, Robotics, Drones & Smart Systems',
+  'Electronics, VLSI, Embedded Systems & Next-Generation Communication (5G/6G)',
+  'Quantum Computing & Advanced Computing Paradigms',
+  'Green Technology, Renewable Energy & Sustainable Engineering',
+  'Electric Vehicles, Smart Cities & Sustainable Infrastructure',
+  'Healthcare Technology, Biotechnology & Interdisciplinary Innovations',
+  'Industry 4.0, Smart Manufacturing, Management, Entrepreneurship & Start-up Innovations',
 ];
 const ABSTRACT_DEADLINE = new Date('2026-09-30T23:59:59+05:30');
 
