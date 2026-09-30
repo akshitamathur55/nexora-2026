@@ -15,7 +15,8 @@ const VALID_TRACKS = [
   'Healthcare Technology, Biotechnology & Interdisciplinary Innovations',
   'Industry 4.0, Smart Manufacturing, Management, Entrepreneurship & Start-up Innovations',
 ];
-const ABSTRACT_DEADLINE = new Date('2026-09-30T23:59:59+05:30');
+// const ABSTRACT_DEADLINE = new Date('2026-09-30T23:59:59+05:30');
+const ABSTRACT_DEADLINE = new Date('2026-10-03T23:59:59+05:30');
 
 exports.createSubmission = async (req, res, next) => {
   try {

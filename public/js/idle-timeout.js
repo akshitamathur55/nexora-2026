@@ -1,6 +1,5 @@
-// Signs the user out after 15 minutes of no activity, then shows a
-// "session timed out" message when they land back on the login page.
-const IDLE_LIMIT_MS = 15 * 60 * 1000; // 15 minutes
+const IDLE_LIMIT_MS = 15 * 60 * 1000; 
+
 const ACTIVITY_EVENTS = ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'];
 
 let idleTimer = null;
@@ -13,7 +12,7 @@ function resetIdleTimer() {
       sessionStorage.setItem('nexora_session_timeout', '1');
       await auth.signOut();
     } catch (e) {
-      // ignore — we're redirecting either way
+      
     } finally {
       window.location.href = '/login?timeout=1';
     }

@@ -1,4 +1,5 @@
-const NEXORA_DEADLINE = new Date('2026-09-30T23:59:59+05:30');
+// const NEXORA_DEADLINE = new Date('2026-09-30T23:59:59+05:30');
+const NEXORA_DEADLINE = new Date('2026-10-03T23:59:59+05:30');
 
 function updateTopbarCountdown() {
   const daysEl = document.getElementById('tb-days');
