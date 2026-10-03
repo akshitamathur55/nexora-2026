@@ -26,6 +26,7 @@ async function loadRegistrations() {
     row.innerHTML = `
       <td>${reg.name}</td>
       <td>${reg.email}</td>
+      <td>${reg.college}</td>
       <td>${reg.track}</td>
       <td>
         ${reg.paymentProofUrl
