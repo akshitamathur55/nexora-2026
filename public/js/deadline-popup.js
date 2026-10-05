@@ -1,7 +1,7 @@
 // Shows a one-time-per-session popup about the extended deadline.
 // Stops showing automatically once the deadline itself has passed.
 (function () {
-  const DEADLINE = new Date('2026-10-05T23:59:59+05:30');
+  const DEADLINE = new Date('2026-10-10T23:59:59+05:30');
   const STORAGE_KEY = 'nexora_deadline_popup_seen';
 
   if (new Date() > DEADLINE) return;
@@ -17,7 +17,7 @@
         <div class="deadline-popup-icon">📢</div>
         <h3>Submission Deadline Extended!</h3>
         <p>We've extended the abstract & poster submission deadline, giving you a few extra days to finish your submission.</p>
-        <div class="deadline-popup-date">New Deadline: 5 October 2026, 11:59 PM IST</div>
+              <div class="deadline-popup-date">New Deadline: 10 October 2026, 11:59 PM IST</div>
       </div>
     `;
     document.body.appendChild(overlay);
