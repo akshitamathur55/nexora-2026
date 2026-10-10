@@ -1,3 +1,4 @@
+const SUBMISSIONS_CLOSED_AT = new Date('2026-10-10T21:00:00+05:30');
 const MAX_AUTHORS = 4;
 
 async function authedFetch(url, options = {}) {
@@ -65,8 +66,20 @@ auth.onAuthStateChanged(async (user) => {
   if (!user) { window.location.href = '/login'; return; }
   const regRes = await authedFetch('/api/registration/me');
   if (regRes.status !== 200) { window.location.href = '/register'; return; }
-  const subRes = await authedFetch('/api/submission/me');
+//   const subRes = await authedFetch('/api/submission/me');
+//   if (subRes.status === 200) { window.location.href = '/payment'; return; }
+// });
+     const subRes = await authedFetch('/api/submission/me');
   if (subRes.status === 200) { window.location.href = '/payment'; return; }
+
+  if (new Date() > SUBMISSIONS_CLOSED_AT) {
+    const form = document.getElementById('submission-form');
+    form.style.display = 'none';
+    const notice = document.createElement('div');
+    notice.className = 'card';
+    notice.innerHTML = '<h3>Submissions are closed</h3><p style="color:var(--text-secondary);">The abstract & poster submission window has ended. Thank you for your interest in NEXORA 2026.</p>';
+    form.after(notice);
+  }
 });
 
 document.getElementById('submission-form').addEventListener('submit', async (e) => {

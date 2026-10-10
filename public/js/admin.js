@@ -21,9 +21,10 @@ async function loadRegistrations() {
   const tbody = document.getElementById('reg-table-body');
   tbody.innerHTML = '';
 
-  data.registrations.forEach(reg => {
+  data.registrations.forEach((reg, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
+      <td>${index + 1}</td>
       <td>${reg.name}</td>
       <td>${reg.email}</td>
       <td>${reg.college}</td>

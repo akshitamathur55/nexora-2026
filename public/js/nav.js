@@ -7,7 +7,7 @@ auth.onAuthStateChanged(async (user) => {
   if (!authLinks) return;
 
   if (!user) {
-    authLinks.innerHTML = `<a href="/login">Login</a> <a href="/signup" class="btn btn-primary" style="margin-left:8px;">Sign In</a>`;
+       authLinks.innerHTML = `<a href="/login">Login</a>`;
     return;
   }
 

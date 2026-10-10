@@ -16,6 +16,10 @@ const VALID_TRACKS = [
 // FR-2.1, FR-2.2: create a registration, blocking duplicates (BR-2).
 exports.createRegistration = async (req, res, next) => {
   try {
+    // Registrations closed on 10 Oct 2026
+    if (new Date() > new Date('2026-10-10T21:00:00+05:30')) {
+      return res.status(403).json({ success: false, message: 'Registrations are closed.' });
+    }
     const uid = req.user.uid;
     const { name, email, college, phone, track } = req.body;
 
@@ -67,6 +71,10 @@ exports.getMyRegistration = async (req, res, next) => {
 // memoryStorage + 5MB limit in the route), forward to Cloudinary, update status.
 exports.uploadPaymentProof = async (req, res, next) => {
   try {
+    // Payments closed on 10 Oct 2026
+    if (new Date() > new Date('2026-10-10T21:00:00+05:30')) {
+      return res.status(403).json({ success: false, message: 'Payments are closed.' });
+    }
     const uid = req.user.uid;
 
     if (!req.file) {

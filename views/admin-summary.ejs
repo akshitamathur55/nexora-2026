@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <title>NEXORA 2026 — Admin: Summary</title>
+</head>
+<body>
+  <div class="admin-guard-overlay" id="admin-guard-overlay">Checking access…</div>
+  <%- include('partials/nav') %>
+
+  <div class="container admin-page-container">
+    <div class="admin-header-row">
+      <h1>Summary</h1>
+      <div class="admin-header-links">
+        <a href="/admin" class="btn admin-header-btn">← Registrations</a>
+        <a href="/admin/submissions" class="btn btn-primary admin-header-btn">View Submissions →</a>
+      </div>
+    </div>
+
+    <div class="summary-grid">
+      <div class="card">
+        <div class="summary-label">Total Submissions</div>
+        <div class="summary-value" id="total-submissions">–</div>
+      </div>
+      <div class="card">
+        <div class="summary-label">Total Students (all teams)</div>
+        <div class="summary-value" id="total-students">–</div>
+      </div>
+    </div>
+
+    <h2 class="summary-section-title">Submissions by Track</h2>
+    <p style="color:var(--text-secondary); font-size:14px; margin:-8px 0 16px;">Click a track to see only its submissions.</p>
+    <div class="summary-grid" id="track-grid"></div>
+  </div>
+
+  <%- include('partials/footer') %>
+  <script src="/js/nav.js"></script>
+  <script src="/js/idle-timeout.js"></script>
+  <script src="/js/admin-summary.js"></script>
+</body>
+</html>

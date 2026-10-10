@@ -1,15 +1,19 @@
-const NEXORA_DEADLINE = new Date('2026-10-10T23:59:59+05:30');
+const NEXORA_DEADLINE = new Date('2026-10-10T21:00:00+05:30');
 
 function updateTopbarCountdown() {
   const daysEl = document.getElementById('tb-days');
   if (!daysEl) return; // topbar not on this page render yet
 
   const diff = NEXORA_DEADLINE - new Date();
-  if (diff <= 0) {
+  // if (diff <= 0) {
+  //   document.querySelector('.topbar-left span:last-child').textContent = 'SUBMISSIONS CLOSED';
+  //   return;
+  // }
+    if (diff <= 0) {
     document.querySelector('.topbar-left span:last-child').textContent = 'SUBMISSIONS CLOSED';
+    ['tb-days', 'tb-hrs', 'tb-min', 'tb-sec'].forEach(id => { document.getElementById(id).textContent = '00'; });
     return;
   }
-
   const d = Math.floor(diff / 86400000);
   const h = Math.floor(diff / 3600000) % 24;
   const m = Math.floor(diff / 60000) % 60;

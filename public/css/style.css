@@ -821,3 +821,27 @@ textarea { min-height: 90px; }
   font-size: 13.5px;
   line-height: 1.55;
 }
+
+/* Admin: serial number column + summary page */
+.admin-table th:first-child,
+.admin-table td:first-child { width: 56px; }
+
+.admin-header-links { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 36px; }
+.summary-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-secondary); margin-bottom: 8px; }
+.summary-value { font-size: 38px; font-weight: 800; font-family: 'Georgia', serif; color: var(--accent); line-height: 1.1; }
+.summary-track-name { font-size: 15px; font-weight: 700; line-height: 1.35; min-height: 42px; margin-bottom: 10px; }
+.summary-track-value { font-size: 30px; font-weight: 800; font-family: 'Georgia', serif; color: var(--accent); line-height: 1; }
+.summary-section-title { margin: 0 0 16px; }
+
+@media (max-width: 600px) {
+  .admin-header-links { width: 100%; }
+  .admin-header-links .admin-header-btn { flex: 1; text-align: center; }
+}
+
+.summary-track-link { display: block; text-decoration: none; color: var(--text-primary); cursor: pointer; }
+.summary-track-link:hover .summary-track-name { color: var(--accent); }
+
+span.topbar-cta,
+span.topbar-cta:hover { background: #954703; cursor: default; }

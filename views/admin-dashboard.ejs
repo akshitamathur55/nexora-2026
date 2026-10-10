@@ -9,9 +9,16 @@
   <%- include('partials/nav') %>
 
   <div class="container admin-page-container">
-    <div class="admin-header-row">
+    <!-- <div class="admin-header-row">
       <h1>Admin — Registrations</h1>
       <a href="/admin/submissions" class="btn btn-primary admin-header-btn">View Submissions →</a>
+    </div> -->
+        <div class="admin-header-row">
+      <h1>Admin — Registrations</h1>
+      <div class="admin-header-links">
+        <a href="/admin/summary" class="btn admin-header-btn">Summary</a>
+        <a href="/admin/submissions" class="btn btn-primary admin-header-btn">View Submissions →</a>
+      </div>
     </div>
 
     <div class="admin-filter-row">
@@ -36,6 +43,7 @@
         </thead> -->
                   <thead>
             <tr>
+              <th>S.No.</th>
               <th>Name</th>
               <th>Email</th>
               <th>College</th>

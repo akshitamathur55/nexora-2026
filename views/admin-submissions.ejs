@@ -9,7 +9,12 @@
   <%- include('partials/nav') %>
     <!-- <div class="container" style="max-width: 1000px; padding-top: 48px;"> -->
       <div class="container admin-page-container"></div>
-    <h1>Admin — Submissions</h1>
+    <!-- <h1>Admin — Submissions</h1>
+    <p><a href="/admin">← Back to Registrations</a></p> -->
+        <div class="admin-header-row">
+      <h1>Admin — Submissions</h1>
+      <a href="/admin/summary" class="btn admin-header-btn">Summary</a>
+    </div>
     <p><a href="/admin">← Back to Registrations</a></p>
 
     <!-- <div style="margin-bottom: 24px;">
@@ -58,6 +63,7 @@
         <table class="admin-table">
           <thead>
             <tr style="text-align:left; border-bottom: 1px solid var(--border);">
+              <th style="padding:8px;">S.No.</th>
               <th style="padding:8px;">Title</th>
               <th style="padding:8px;">Authors</th>
               <th style="padding:8px;">Track</th>

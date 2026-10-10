@@ -1,4 +1,4 @@
-let currentTrack = '';
+let currentTrack = new URLSearchParams(window.location.search).get('track') || '';
 
 async function authedFetch(url, options = {}) {
   const user = auth.currentUser;
@@ -21,7 +21,7 @@ async function loadSubmissions() {
   const tbody = document.getElementById('sub-table-body');
   tbody.innerHTML = '';
 
-  data.submissions.forEach(sub => {
+  data.submissions.forEach((sub, index) => {
     const row = document.createElement('tr');
     row.style.borderBottom = '1px solid var(--border)';
         const abstractCell = `<a href="${sub.abstractFileUrl}" target="_blank">View PDF</a>`;
@@ -43,6 +43,7 @@ const authorsHtml = authors.map((author, index) => `
   </div>
 `).join('');
     row.innerHTML = `
+      <td style="padding:8px;">${index + 1}</td>
       <td style="padding:8px;">${sub.title}</td>
       <td>${authorsHtml}</td>
       <td style="padding:8px;">${sub.track}</td>

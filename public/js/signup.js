@@ -1,3 +1,11 @@
+if (new Date() > new Date('2026-10-10T21:00:00+05:30')) {
+  const signupForm = document.getElementById('signup-form');
+  signupForm.style.display = 'none';
+  const notice = document.createElement('div');
+  notice.className = 'card';
+  notice.innerHTML = '<h3>Registrations are closed</h3><p style="color:var(--text-secondary);">New sign-ups are no longer being accepted. If you already have an account, please <a href="/login">log in</a>.</p>';
+  signupForm.after(notice);
+}
 document.getElementById('signup-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 

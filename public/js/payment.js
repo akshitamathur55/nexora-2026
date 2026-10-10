@@ -1,3 +1,4 @@
+const PAYMENTS_CLOSED_AT = new Date('2026-10-10T21:00:00+05:30');
 const statusColors = { 'Pending Payment': 'status-pending', 'Pending Verification': 'status-pending', 'Verified': 'status-success', 'Rejected': 'status-error' };
 
 async function authedFetch(url, options = {}) {
@@ -13,8 +14,16 @@ function showStatus(status) {
   const tag = document.getElementById('status-tag');
   tag.textContent = status;
   tag.className = 'status-tag ' + statusColors[status];
-  if (status === 'Pending Payment' || status === 'Rejected') {
-    document.getElementById('payment-section').style.display = 'block';
+    if (status === 'Pending Payment' || status === 'Rejected') {
+    if (new Date() > PAYMENTS_CLOSED_AT) {
+      const notice = document.createElement('div');
+      notice.className = 'card';
+      notice.style.marginBottom = '24px';
+      notice.innerHTML = '<h3>Payments are closed</h3><p style="color:var(--text-secondary);">The payment window has ended, so new payment proofs are no longer being accepted.</p>';
+      document.getElementById('status-section').before(notice);
+    } else {
+      document.getElementById('payment-section').style.display = 'block';
+    }
   }
 }
 

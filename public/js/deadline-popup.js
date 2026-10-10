@@ -1,7 +1,7 @@
 // Shows a one-time-per-session popup about the extended deadline.
 // Stops showing automatically once the deadline itself has passed.
 (function () {
-  const DEADLINE = new Date('2026-10-10T23:59:59+05:30');
+  const DEADLINE = new Date('2026-10-10T21:00:00+05:30');
   const STORAGE_KEY = 'nexora_deadline_popup_seen';
 
   if (new Date() > DEADLINE) return;

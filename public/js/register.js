@@ -9,7 +9,15 @@ async function authedFetch(url, options = {}) {
 auth.onAuthStateChanged(async (user) => {
   if (!user) { window.location.href = '/login'; return; }
   const res = await authedFetch('/api/registration/me');
-  if (res.status === 200) { window.location.href = '/dashboard'; } // already registered
+  if (res.status === 200) { window.location.href = '/dashboard'; return; } // already registered
+
+  if (new Date() > new Date('2026-10-10T21:00:00+05:30')) {
+    const form = document.getElementById('registration-form');
+    form.style.display = 'none';
+    const notice = document.createElement('div');
+    notice.innerHTML = '<h3>Registrations are closed</h3><p style="color:var(--text-secondary);">The registration window has ended. Thank you for your interest in NEXORA 2026.</p>';
+    form.after(notice);
+  }
 });
 
 document.getElementById('registration-form').addEventListener('submit', async (e) => {

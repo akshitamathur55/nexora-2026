@@ -17,5 +17,5 @@ router.get('/submissions', submissionController.listSubmissions);
 router.patch('/submissions/:id/review', submissionController.reviewSubmission);
 
 router.get('/participant/:uid', adminController.getParticipantDetail);
-
+router.get('/summary', adminController.getSummary);
 module.exports = router;

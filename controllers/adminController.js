@@ -57,3 +57,20 @@ exports.getParticipantDetail = async (req, res, next) => {
     });
   } catch (err) { next(err); }
 };
+
+exports.getSummary = async (req, res, next) => {
+  try {
+    const snapshot = await db.collection('submissions').get();
+    let totalStudents = 0;
+    const trackCounts = {};
+
+    snapshot.docs.forEach(doc => {
+      const s = doc.data();
+      // authors is an array on newer submissions; older ones stored a single string
+      totalStudents += Array.isArray(s.authors) ? s.authors.length : 1;
+      trackCounts[s.track] = (trackCounts[s.track] || 0) + 1;
+    });
+
+    res.json({ success: true, totalSubmissions: snapshot.size, totalStudents, trackCounts });
+  } catch (err) { next(err); }
+};
